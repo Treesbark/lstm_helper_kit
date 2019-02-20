@@ -4,10 +4,8 @@
 """Tests for `lstm_helper_kit` package."""
 
 import pytest
-
 from click.testing import CliRunner
-
-from lstm_helper_kit import lstm_helper_kit
+# from lstm_helper_kit import lstm_helper_kit
 from lstm_helper_kit import cli
 
 
@@ -36,3 +34,4 @@ def test_command_line_interface():
     help_result = runner.invoke(cli.main, ['--help'])
     assert help_result.exit_code == 0
     assert '--help  Show this message and exit.' in help_result.output
+

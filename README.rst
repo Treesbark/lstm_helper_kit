@@ -1,5 +1,5 @@
 ===============
-lstm_helper_kit
+LSTM Helper Kit
 ===============
 
 
@@ -16,7 +16,7 @@ lstm_helper_kit
 
 
 
-Code for simplifying LSTM development and maintenance
+Code for simplifying LSTM development and maintenance.
 
 
 * Free software: MIT license
@@ -25,7 +25,7 @@ Code for simplifying LSTM development and maintenance
 Features
 --------
 
-* Includes a variety of functions for abstracting out the management and development of an LSTM.
+* Includes a variety of functions for abstracting out the management and development of an LSTM on home projects.
 
 Credits
 -------
