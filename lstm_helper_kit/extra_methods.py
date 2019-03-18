@@ -1,13 +1,22 @@
 # -*- coding: utf-8 -*-
 
-"""Main module."""
+"""
+This file simply contains some older, outdated methods that have been reconstituted into the LSTM Keras Model Class
 
-# Importing the libraries
+"""
 
 import matplotlib.pyplot as plt
+import os
+import math
+import numpy as np
+import datetime as dt
+from numpy import newaxis
+from sklearn.preprocessing import MinMaxScaler
+from keras.layers import Dense, Activation, Dropout, LSTM
+from keras.models import Sequential, load_model, model_from_json
+from keras.callbacks import EarlyStopping, ModelCheckpoint
+from pathlib import Path
 plt.style.use('fivethirtyeight')
-from keras.models import model_from_json
-
 
 def save_keras_model(file_save_path, model, force_overwrite=False):
     """
@@ -34,7 +43,7 @@ def save_keras_model(file_save_path, model, force_overwrite=False):
 
     # Check to see if file is in path to avoid overwriting
     file_checker = Path(file_save_path)
-    if file_checker.is_file() or force_overwrite == False:
+    if file_checker.is_file() and force_overwrite == False:
         print("File already exists")
     else:
         # Save the model to json
@@ -61,8 +70,6 @@ def load_keras_model(complete_model_path):
         a loaded Keras model
 
     """
-    from pathlib import Path
-
     # Checks to make sure a '.json' is appended to the end of the string
     if complete_model_path[-4:] != ".json":
         complete_model_path = complete_model_path + ".json"
