@@ -43,8 +43,8 @@ class LSTMKerasModel():
         from pathlib import Path
 
         # Checks to make sure a '.json' is appended to the end of the string
-        if complete_model_path[-5:] != ".json":
-            complete_model_path = complete_model_path + ".json"
+        if complete_model_path.endswith('.json'):
+            complete_model_path = complete_model_path + '.json'
 
         # Check to see if the model exists
         file_checker = Path(complete_model_path)
@@ -81,8 +81,8 @@ class LSTMKerasModel():
         from pathlib import Path
 
         # Checks to make sure a '.json' is appended to the end of the string
-        if file_save_path[-5:] != ".json":
-            file_save_path = file_save_path + ".json"
+        if file_save_path.endswith('.json'):
+            file_save_path = file_save_path + '.json'
 
         # Check to see if file is in path to avoid overwriting
         file_checker = Path(file_save_path)
@@ -168,7 +168,7 @@ class LSTMKerasModel():
 
         return scaled_training_set
 
-    def format_training_data_for_LSTM(self, scaled_training_set, training_window_size=365):
+    def format_training_data_for_LSTM(self, scaled_training_set, training_window_size=365, prediction_output_size=1):
         """
         Method that prepares the data for ingestion into an LSTM for training
         purposes
@@ -179,6 +179,8 @@ class LSTMKerasModel():
             the scaled (0,1) training set
         input_window_size : int
             the size of the training window
+        prediction_output_size : int
+            the size of the prediction output length
 
         Returns
         -------
@@ -200,7 +202,7 @@ class LSTMKerasModel():
         # user specified window size and the length of the training set
         for i in range(training_window_size, len(scaled_training_set)):
             X_training_data.append(scaled_training_set[i - training_window_size:i, 0])
-            y_training_data.append(scaled_training_set[i, 0])
+            y_training_data.append(scaled_training_set[i:i+prediction_output_size, 0])
 
         # Convert the values into a numpy array
         X_training_data = np.array(X_training_data)

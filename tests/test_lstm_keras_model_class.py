@@ -22,6 +22,7 @@ def lstm_wrapper_object():
         lstm wrapper object that is the main class in this package
     """
     lstm_wrapper_object = LSTMKerasModel()
+
     return lstm_wrapper_object
 
 @pytest.fixture
@@ -36,12 +37,14 @@ def pandas_series_object():
     """
     data = np.array(np.arange(10))
     pandas_series = pd.Series(data)
+
     return pandas_series
 
 def test_create_train_and_test_data(lstm_wrapper_object, pandas_series_object):
     train_set, test_set = lstm_wrapper_object.create_train_and_test_data(pandas_series_object)
     expected_training_array = np.array(np.arange(8)).reshape(8,1)
     expected_testing_array = np.array([8, 9]).reshape(2,1)
+
     assert (train_set==expected_training_array).all()
     assert (test_set==expected_testing_array).all()
 
